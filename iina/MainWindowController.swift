@@ -2100,8 +2100,13 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func exitPIP(manually: Bool) {
     isInPIP = false
-    if manually {
-      pip.dismissViewController(pipVideo)
+//    if manually {
+//      pip.dismissViewController(pipVideo)
+//    }
+    if let presentedViewControllers = pip.presentedViewControllers {
+      if presentedViewControllers.contains(pipVideo) {
+        pip.dismissViewController(pipVideo)
+      }
     }
     pipOverlayView.isHidden = true
     window?.contentView?.addSubview(videoView, positioned: .below, relativeTo: nil)
